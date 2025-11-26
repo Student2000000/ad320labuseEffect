@@ -11,7 +11,7 @@ function App() {
   }, []);
 
   const getPokes = async () => {
-    let res = await fetch('https://pokeapi.co/api/v2/pokemon/{id or name}/');
+    let res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=20');
     let data = await res.json();
     setCurrentPokemon(data.results);
   };
@@ -28,4 +28,4 @@ function App() {
   );
 };
 
-export default App
+export default App;
