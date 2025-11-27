@@ -37,8 +37,8 @@ function App() {
   console.log(currentPokemon);
 
   return (
-    <div className='App'>
-      <h1> Pokemons! </h1>
+    <div className="App">
+      <h1> Pokemon List </h1>
       <div className="main-container ">
         <div>
           <Pokemon currentPokemon={currentPokemon} />

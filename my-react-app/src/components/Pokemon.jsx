@@ -20,11 +20,11 @@ const Pokemon = ({ currentPokemon }) => {
     };
 
     return (
-        <div className="Pokemon">
+        <div className="cards">
             {currentPokemon.map((c, index) => (
                 <div
                     key = {index}
-                    className = "pokemon"
+                    className="card"
                     onClick={() => fetchPokeByName(c.name)} >
                     {c.name}
                 </div>
