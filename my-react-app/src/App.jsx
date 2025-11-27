@@ -16,7 +16,6 @@ function App() {
     let res = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=${LIMIT}&offset=${offset}`);
     let data = await res.json();
 
-    //console.log(page);
     console.log(data.results);
     setCurrentPokemon(data.results);
   };
@@ -27,15 +26,12 @@ function App() {
 
 
   const onClickBack = () => {
-    /*
-    console.log(page); 
-    if (page[0] <= 0) {
-      setPage([30, 35]);
+    if (offset <= 0) {
+      setOffset(0);
     } else {
-      console.log(page); 
-      setPage((prev) => [prev[0] - 5, prev[1] - 5]);
+      setOffset(offset - LIMIT);
     }
-      */
+      //setOffset((prev) => Math.max(prev - LIMIT, 0));
   };
 
   console.log(currentPokemon);
@@ -46,8 +42,8 @@ function App() {
       <div className="main-container ">
         <div>
           <Pokemon currentPokemon={currentPokemon} />
-          <button onClick={onClickBack}>Back!</button>
-          <button onClick={onClickNext}>Next Page!</button>
+          <button onClick={onClickBack} disabled={offset === 0}> Back </button>
+          <button onClick={onClickNext}> Next </button>
         </div>
       </div>
     </div>
