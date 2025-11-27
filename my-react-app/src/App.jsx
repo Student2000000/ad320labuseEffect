@@ -5,35 +5,40 @@ import './App.css'
 
 function App() {
   const [currentPokemon, setCurrentPokemon] = useState([]);
-  const [page, setPage] = useState([0, 5]);
+  const [offset, setOffset] = useState(0);
+  const LIMIT = 20;  
 
   useEffect(() => {
     getPokes();
-  }, [page]);
+  }, [offset]);
 
   const getPokes = async () => {
-    let res = await fetch('https://pokeapi.co/api/v2/pokemon?limit=20');
+    let res = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=${LIMIT}&offset=${offset}`);
     let data = await res.json();
+
+    //console.log(page);
+    console.log(data.results);
     setCurrentPokemon(data.results);
   };
 
   const onClickNext = () => {
-    if (page[1] < 20) {
-      setPage((prev) => [prev[0] + 5, prev[1] + 5]);
-    } else {
-      setPage( [0, 5]);
-    }
+      setOffset((prev) => LIMIT + prev);
   };
 
+
   const onClickBack = () => {
+    /*
     console.log(page); 
     if (page[0] <= 0) {
-      setPage([20, 25]);
+      setPage([30, 35]);
     } else {
       console.log(page); 
       setPage((prev) => [prev[0] - 5, prev[1] - 5]);
     }
+      */
   };
+
+  console.log(currentPokemon);
 
   return (
     <div className='App'>

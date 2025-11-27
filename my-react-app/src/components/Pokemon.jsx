@@ -4,14 +4,16 @@ import PokemonDetail from "./PokemonDetail";
 const Pokemon = ({ currentPokemon }) => {
     const [selectedPoke, setSelectecPoke] = useState();
 
-    const fetchPokeByID = async (id) => {
+    const fetchPokeByName = async (name) => {
         try {
-            const response = await fetch('https://pokeapi.co/api/v2/pokemon/${id}');
-            const data = await response.json();
-            setSelectecPoke(data);
+            const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${name}`);
+            
             if (!response.ok) {
                 throw new Error("Poke lost!"); 
             }
+            
+            const data = await response.json();
+            setSelectecPoke(data);
         } catch (error) {
             console.error("Error fetching Poke :( :", error);
         }
@@ -23,7 +25,7 @@ const Pokemon = ({ currentPokemon }) => {
                 <div
                     key = {index}
                     className = "pokemon"
-                    onClick={() => fetchPokeByID(c.id)} >
+                    onClick={() => fetchPokeByName(c.name)} >
                     {c.name}
                 </div>
             ))}
